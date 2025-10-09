@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rd Computer Institute</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      color: darkred;
+      font-size: 28px;
+      margin: 20px;
+	  text-align:center;
+	  font-family:lucida fax;
+	  font-size:55px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 50px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    .hero {
+      background-color: #007BFF;
+      color: yellow;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h2 {
+      font-size: 40px;
+      margin: 0 0 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    .courses-section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .courses-section h2 {
+      background-color: red;
+      color: white;
+      display: inline-block;
+      padding: 10px 30px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+
+    .course-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .why-us {
+      background-color: #fff;
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .why-us h3 {
+      background-color: yellow;
+      display: inline-block;
+      padding: 5px 20px;
+      margin-bottom: 20px;
+    }
+
+    .why-us ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .why-us ul li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .why-us ul li::before {
+      content: "✅";
+      color: #007BFF;
+      margin-right: 10px;
+    }
+
+    footer {
+      background-color: #001F54;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .course-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>RD COMPUTER INSTITUTE</h1>
+    <nav>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#courses">Courses</a>
+      <a href="#students">Student's Corner</a>
+      <a href="#login">Official Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Empowering Your Digital Future</h2>
+    <p>Learn Ms-office, Photoshop, Tally, web programming, design, with expert trainers.</p>
+  </section>
+
+  <section class="courses-section" id="courses">
+    <h2>Our Courses</h2>
+    <div class="course-cards">
+      <div class="card">
+        <strong>COMPUTER BASIC TO ADVANCE</strong><br />
+        Ms Word, Ms Excel, Ms PowerPoint, Internet,<br /> DTP, Typing
+      </div>
+      <div class="card">
+        <strong>WEB PAGE DEVELOPMENT</strong><br />
+        Design techniques.<br /> HTML, CSS
+      </div>
+      <div class="card">
+        <strong>TALLY</strong><br />
+        Latest Tally Prime Basic to Advance
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <h3>Why Choose Us</h3>
+    <ul>
+      <li>Certified Trainers – Learn from industry-certified professionals.</li>
+      <li>Hands-on Practice – Practical labs with real-world projects.</li>
+      <li>Job Assistance – Interview and placement support.</li>
+      <li>Affordable Fees – Flexible options and discounts available.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>RD COMPUTER INSTITUTE</strong><br />
+    BANKA BAZAR, SURADA, GANJAM, 761108<br />
+    9937557070, mail - rdci.surada@gmail.com</p>
+  </footer>
+
+</body>
+</html>
