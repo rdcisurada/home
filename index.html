@@ -1,137 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rd Computer Institute</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RD Computer Institute</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(270deg, #1a2a6c, #b21f1f, #fdbb2d, #1a2a6c);
+    background-size: 800% 800%;
+    animation: gradientShift 30s ease infinite;
+    color: #fff;
+  }
 
-    header {
-      background-color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    header h1 {
-      color: darkred;
-      font-size: 28px;
-      margin: 20px;
-	  text-align:center;
-	  font-family:lucida fax;
-	  font-size:55px;
-    }
+  /* Floating shapes container to keep shapes in background */
+  .floating-shapes {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 0;
+  }
 
-    nav {
-      margin-top: 10px;
-    }
+  /* Shape basics */
+  .shape {
+    position: absolute;
+    opacity: 0.4;
+    filter: drop-shadow(0 0 4px rgba(255 255 255 / 0.3));
+    animation-timing-function: ease-in-out;
+  }
 
+  /* Circle */
+  .shape.circle {
+    border-radius: 50%;
+    border: 2px solid rgba(255 255 255 / 0.4);
+  }
+
+  /* Square */
+  .shape.square {
+    border: 2px solid rgba(255 255 255 / 0.25);
+  }
+
+  /* Triangle using border trick */
+  .shape.triangle {
+    width: 0; height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid rgba(255 255 255 / 0.3);
+    background: transparent;
+    border-radius: 0;
+    filter: drop-shadow(0 0 6px rgba(255 255 255 / 0.2));
+  }
+
+  /* Different floating animations */
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-40px); opacity: 0.9; }
+  }
+
+  @keyframes floatLeftRight {
+    0%, 100% { transform: translateX(0); opacity: 0.6; }
+    50% { transform: translateX(60px); opacity: 1; }
+  }
+
+  @keyframes floatDiagonalPulse {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(50px, -30px) scale(1.15); opacity: 0.8; }
+  }
+
+  /* Assign shapes positions and animations */
+  .shape1 {
+    width: 120px; height: 120px;
+    top: 15vh; left: -150px;
+    border-color: rgba(255 255 255 / 0.3);
+    animation: floatDiagonalPulse 30s infinite;
+    animation-delay: 0s;
+  }
+
+  .shape2 {
+    width: 80px; height: 80px;
+    top: 60vh; left: 10vw;
+    animation: floatUpDown 18s infinite;
+    animation-delay: 4s;
+  }
+
+  .shape3 {
+    width: 90px; height: 90px;
+    top: 40vh; left: 80vw;
+    border-color: rgba(255 255 255 / 0.15);
+    animation: floatLeftRight 25s infinite;
+    animation-delay: 2s;
+  }
+
+  .shape4 {
+    width: 100px; height: 100px;
+    top: 75vh; left: 90vw;
+    animation: floatDiagonalPulse 28s infinite reverse;
+    animation-delay: 10s;
+  }
+
+  /* Header styles */
+  header {
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 10;
+  }
+  header h1 {
+    font-size: 60px;
+    letter-spacing: 6px;
+    font-weight: 900;
+    color: #ff6a00;
+    text-shadow:
+      0 0 10px #ff6a00,
+      0 0 20px #ff6a00,
+      0 0 30px #ff6a00,
+      0 0 40px #ff6a00;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px #ff6a00,
+        0 0 20px #ff6a00,
+        0 0 30px #ff6a00,
+        0 0 40px #ff6a00;
+      transform: scale(1);
+      color: #ff6a00;
+    }
+    50% {
+      text-shadow:
+        0 0 20px #00fff7,
+        0 0 40px #00fff7,
+        0 0 60px #00fff7,
+        0 0 80px #00fff7;
+      transform: scale(1.1);
+      color: #00fff7;
+    }
+  }
+
+  /* Navigation */
+  nav {
+    margin-top: 15px;
+  }
+  nav a {
+    color: #fff;
+    margin: 0 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #ff6a00;
+    transition: width 0.3s ease;
+  }
+  nav a:hover {
+    color: #ff6a00;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero section */
+  .hero {
+    background: rgba(0, 123, 255, 0.8);
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    max-width: 900px;
+    margin: 30px auto;
+    animation: fadeInUp 1.5s ease forwards;
+    opacity: 0;
+	
+  }
+  .hero h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffeb3b;
+  }
+
+  /* Courses section */
+  .courses-section {
+    background: rgba(255 255 255 / 0.9);
+    color: #333;
+    border-radius: 30px;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    animation: fadeInUp 2s ease forwards;
+    opacity: 0;
+	
+	
+	
+  }
+  .courses-section h2 {
+   max-width: 200px;
+    margin: 50px auto;
+    background: red;
+    color: #444;
+    padding: 10px 10px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeInUp 2.5s ease forwards;
+    opacity: 0;
+	
+  }
+
+  /* Cards container */
+  .course-cards {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  /* Individual course cards */
+  .card {
+    background: white;
+    color: #444;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 280px;
+    padding: 25px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .card strong {
+    font-size: 1.2rem;
+    color: #e53935;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  }
+
+  /* Why Us Section */
+  .why-us {
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    color: #444;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeInUp 2.5s ease forwards;
+    opacity: 0;
+  }
+  .why-us h3 {
+    background: #ffeb3b;
+    display: inline-block;
+    padding: 10px 40px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    border-radius: 30px;
+    color: #333;
+  }
+  .why-us ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .why-us ul li {
+    margin: 15px 0;
+    position: relative;
+    padding-left: 35px;
+    text-align: left;
+  }
+  .why-us ul li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+    color: #2196f3;
+  }
+
+  /* Footer */
+  footer {
+    background: #001F54;
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+    border-radius: 20px 20px 0 0;
+    max-width: 1100px;
+    margin: 60px auto 40px;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.3);
+  }
+
+  /* Animations for fadeInUp on sections */
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
     nav a {
-      margin: 0 50px;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
+      margin: 0 15px;
+      font-size: 1rem;
     }
-
-    .hero {
-      background-color: #007BFF;
-      color: yellow;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .hero h2 {
-      font-size: 40px;
-      margin: 0 0 20px;
-    }
-
-    .hero p {
-      font-size: 20px;
-    }
-
-    .courses-section {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .courses-section h2 {
-      background-color: red;
-      color: white;
-      display: inline-block;
-      padding: 10px 30px;
-      border-radius: 10px;
-      font-size: 24px;
-    }
-
     .course-cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 30px;
-      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
     }
-
     .card {
-      background-color: white;
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 15px;
-      width: 250px;
-      font-size: 16px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 90vw;
     }
-
-    .why-us {
-      background-color: #fff;
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
+    .hero h2 {
+      font-size: 32px;
     }
-
-    .why-us h3 {
-      background-color: yellow;
-      display: inline-block;
-      padding: 5px 20px;
-      margin-bottom: 20px;
+    .hero p {
+      font-size: 1rem;
     }
-
-    .why-us ul {
-      list-style: none;
-      padding-left: 0;
+    .courses-section, .why-us, footer {
+      margin: 40px 15px;
+      padding: 30px 15px;
     }
-
-    .why-us ul li {
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-
-    .why-us ul li::before {
-      content: "✅";
-      color: #007BFF;
-      margin-right: 10px;
-    }
-
-    footer {
-      background-color: #001F54;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .course-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
-<body oncontextmenu="return false";>
+<body oncontextmenu="return false;">
+
+  <!-- Floating shapes -->
+  <div class="floating-shapes">
+    <div class="shape circle shape1"></div>
+    <div class="shape square shape2"></div>
+    <div class="shape circle shape3"></div>
+    <div class="shape triangle shape4"></div>
+  </div>
 
   <header>
     <h1>RD COMPUTER INSTITUTE</h1>
@@ -153,16 +394,16 @@
     <h2>Our Courses</h2>
     <div class="course-cards">
       <div class="card">
-        <strong>COMPUTER BASIC TO ADVANCE</strong><br />
-        Ms Word, Ms Excel, Ms PowerPoint, Internet,<br /> DTP, Typing
+        <strong><p align="center">COMPUTER BASIC TO ADVANCE</p></strong>
+        <p align="center">Ms Word, Ms Excel, Ms PowerPoint, Internet,<br /> DTP, Typing</p>
       </div>
       <div class="card">
-        <strong>WEB PAGE DEVELOPMENT</strong><br />
-        Design techniques.<br /> HTML, CSS
+        <strong><p align="center">WEB PAGE DEVELOPMENT</strong>
+        Design techniques.<br /> HTML, CSS</p>
       </div>
       <div class="card">
-        <strong>TALLY</strong><br />
-        Latest Tally Prime Basic to Advance
+        <strong><p align="center">TALLY</strong>
+        Latest Tally Prime Basic to Advance</p>
       </div>
     </div>
   </section>
@@ -170,29 +411,16 @@
   <section class="why-us">
     <h3>Why Choose Us</h3>
     <ul>
-      <li>Expert Teachers– Our trainers are experienced and certified. They explain topics clearly and help you understand everything.</li>
-      <li>Practical Learning – We focus on hands-on practice, not just theory. You’ll work on real computers and real projects</li>
-      <li>Certificates – You’ll receive a valid certificate after completing your course — useful for jobs and further studies</li>
-      <li>Affordable Fees – Our courses are budget-friendly. You get quality education without spending too much</li>
-	<li>Flexible Timings – We offer morning, afternoon, and evening batches so you can learn at your convenience</li>
+      <li>Expert Teachers – Our trainers are experienced and certified. They explain topics clearly and help you understand everything.</li>
+      <li>Practical Learning – We focus on hands-on practice, not just theory. You’ll work on real computers and real projects.</li>
+      <li>Certificates – You’ll receive a valid certificate after completing your course — useful for jobs and further studies.</li>
+      <li>Affordable Fees – Our courses are priced competitively for maximum access.</li>
     </ul>
   </section>
 
   <footer>
-    <p><strong>RD COMPUTER INSTITUTE</strong><br />
-    BANKA BAZAR, SURADA, GANJAM, 761108<br />
-    9937557070, mail - rdcisurada@gmail.com</p>
+    &copy; 2025 RD Computer Institute. All rights reserved.
   </footer>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
